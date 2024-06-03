@@ -1,0 +1,41 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+strategy:
+  matrix:
+    Python36:
+      python.version: '3.7'
+      architecture: 'x64'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use python $(python.version)'
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r docs/requirements_sphinx.txt
+  displayName: 'Install dependencies'
+
+- task: CmdLine@2
+  inputs:
+    script: 'make html'
+    workingDirectory: '$(Build.SourcesDirectory)/docs/'
+  displayName: 'Compile documentation'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/docs/build/html'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    Contents: '**'
+  displayName: 'Copy documentation files to artifact directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'Publish documentation as artifact'

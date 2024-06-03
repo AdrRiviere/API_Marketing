@@ -1,0 +1,121 @@
+##################################################################### MARKETING PREFECT FLOW ###################################################################
+
+deployments:
+
+### GOOGLE ADS - MARKETING SPEND
+- name: Google Ads
+  version: 1.0.0
+  tags:
+  - Marketing
+  - Hourly
+  - Campaign
+  - API
+  description: Marketing Data Ingestion - Google Ads API
+  schedule:
+    cron: '0 * * * * *'
+    anchor_date: '2024-04-01T00:00:00+00:00'
+    timezone: UTC
+    active: true
+  flow_name:
+  entrypoint: ../QUA_MarketingDataIngestion/flows/pipeline.google_ads.py:main_tracking_campaign_google_ads
+  parameters: {}
+  work_pool:
+    job_variables:
+      image: prefecthq/prefect:2-latest
+    name: WP_Marketing_Campaign
+    work_queue_name: Marketing_Campaign_Tracking
+
+### META ADS - MARKETING SPEND
+- name: META Ads
+  version: 1.0.0
+  tags:
+  - Marketing
+  - Hourly
+  - Campaign
+  - API
+  description: Marketing Data Ingestion - META Ads API
+  schedule:
+    cron: '0 10 * * * *'
+    anchor_date: '2024-04-01T00:00:00+00:00'
+    timezone: UTC
+    active: true
+  flow_name:
+  entrypoint: ../QUA_MarketingDataIngestion/flows/pipeline_meta_ads.py:main_tracking_campaign_meta_ads
+  parameters: {}
+  work_pool:
+    job_variables:
+      image: prefecthq/prefect:2-latest
+    name: WP_Marketing_Campaign
+    work_queue_name: Marketing_Campaign_Tracking
+
+
+### APPLE SEARCH ADS - MARKETING SPEND
+- name: Apple Search Ads
+  version: 1.0.0
+  tags:
+  - Marketing
+  - Hourly
+  - Campaign
+  - API
+  description: Marketing Data Ingestion - Apple Search Ads API
+  schedule:
+    cron: '0 5 * * * *'
+    anchor_date: '2024-04-01T00:00:00+00:00'
+    timezone: UTC
+    active: false
+  flow_name:
+  entrypoint: ../QUA_MarketingDataIngestion/flows/pipeline_apple_search.py:main_tracking_campaign_apple_search
+  parameters: {}
+  work_pool:
+    job_variables:
+      image: prefecthq/prefect:2-latest
+    name: WP_Marketing_Campaign
+    work_queue_name: Marketing_Campaign_Tracking
+
+
+### LINKEDIN ADS - MARKETING SPEND
+- name: LinkedIn Ads
+  version: 1.0.0
+  tags:
+  - Marketing
+  - Hourly
+  - Campaign
+  - API
+  description: Marketing Data Ingestion - LinkedIn Ads API
+  schedule:
+    cron: '0 15 * * * *'
+    anchor_date: '2024-04-01T00:00:00+00:00'
+    timezone: UTC
+    active: false
+  flow_name:
+  entrypoint: ../QUA_MarketingDataIngestion/flows/pipeline_linkedin_ads.py:main_tracking_campaign_linkedin_ads
+  parameters: {}
+  work_pool:
+    job_variables:
+      image: prefecthq/prefect:2-latest
+    name: WP_Marketing_Campaign
+    work_queue_name: Marketing_Campaign_Tracking
+
+
+### TWITTER ADS - MARKETING SPEND
+- name: Twitter Ads
+  version: 1.0.0
+  tags:
+  - Marketing
+  - Hourly
+  - Campaign
+  - API
+  description: Marketing Data Ingestion - Twitter Ads API
+  schedule:
+    cron: '0 15 * * * *'
+    anchor_date: '2024-04-01T00:00:00+00:00'
+    timezone: UTC
+    active: false
+  flow_name:
+  entrypoint: ../QUA_MarketingDataIngestion/flows/pipeline_twitter_ads.py:main_tracking_campaign_twitter_ads
+  parameters: {}
+  work_pool:
+    job_variables:
+      image: prefecthq/prefect:2-latest
+    name: WP_Marketing_Campaign
+    work_queue_name: Marketing_Campaign_Tracking

@@ -1,0 +1,61 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+    -   id: trailing-whitespace
+    -   id: check-added-large-files
+    -   id: end-of-file-fixer
+    -   id: check-docstring-first
+-   repo: local
+    hooks:
+    -   id: pyupgrade
+        name: pyupgrade
+        description: Automatically upgrade syntax for newer versions.
+        entry: pyupgrade
+        language: python
+        types: [python]
+        # for backward compatibility
+        files: ''
+        minimum_pre_commit_version: 0.15.0
+        args: ['--py37-plus']
+    -   id: isort
+        name: isort
+        entry: isort
+        require_serial: true
+        language: python
+        types: [python]
+        args: ['--filter-files', '--profile', 'black', '--line-length=100']
+        files: '.*'
+    -   id: autopep8
+        name: autopep8
+        description: "A tool that automatically formats Python code to conform to the PEP 8 style guide"
+        entry: autopep8
+        language: python
+        language_version: python3
+        require_serial: true
+        types: [ python ]
+        args: ['--max-line-length=100', '--in-place']
+    -   id: black
+        name: black
+        description: "Black: The uncompromising Python code formatter"
+        entry: black
+        language: python
+        language_version: python3
+        require_serial: true
+        types: [python]
+        args: ['--line-length=100']
+    -   id: flake8
+        name: flake8
+        description: '`flake8` is a command-line utility for enforcing style consistency across Python projects.'
+        entry: flake8
+        language: python
+        types: [python]
+        additional_dependencies:
+          - flake8-broken-line
+          - flake8-blind-except
+          - flake8-builtins
+          - flake8-logging-format
+          - pep8-naming
+        # Exceptions:
+        # - W503, E203: conflict with black
+        args: ['--max-line-length=100','--ignore=W503,E203,T001,G003','--max-complexity=10']

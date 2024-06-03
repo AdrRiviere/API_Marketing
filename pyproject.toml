@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "CampaignTrackingPrefect"
+version = "1.0.0"
+description = "Python Environment Campaign Tracking - Flowbank"
+authors = ["Adrien Riviere"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+pandas = "^1.5.0"
+scipy = "^1.9.1"
+numpy = "^1.23.3"
+click = "^8.0.3"
+pyyaml = "^6.0"
+psycopg2 = "^2.9.5"
+pyodbc = "^4.0.35"
+sqlalchemy = "^1.4.39"
+python-dotenv = "^1.0.0"
+pytz = "^2022.7"
+facebook-sdk = "^3.1.0"
+facebook-business = "^16.0.1"
+twitter-ads = "^11.0.0"
+ratelimit = "^2.2.1"
+prefect = "^2.12.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies] # dev dependency group
+flask = "^2.1.2"
+black = "^22.3.0"
+flake8 = "^5.0.4"
+pre-commit = "^2.19.0"
+isort = "^5.10.1"
+pyupgrade = "^2.32.1"
+autopep8 = "^1.7.0"
+pep8-naming = "^0.12.1"
+pylint = "^2.13.9"
